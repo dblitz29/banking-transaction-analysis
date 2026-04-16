@@ -22,3 +22,12 @@ Source: https://www.kaggle.com/datasets/valakhorasani/bank-transaction-dataset-f
 ```bash
 pip install -r requirements.txt
 ```
+
+## Docker
+
+```bash
+docker build -t fraud-detection-api .
+docker run -p 8000:8000 fraud-detection-api
+```
+
+API docs: http://localhost:8000/docs
