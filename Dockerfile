@@ -8,7 +8,9 @@ COPY api/pyproject.toml api/uv.lock ./
 RUN uv sync --frozen --no-dev
 
 COPY api/main.py api/schemas.py ./
-COPY models/ /app/models/
+COPY models/ ./models/
+
+ENV MODEL_DIR=/app/models
 
 EXPOSE 8000
 

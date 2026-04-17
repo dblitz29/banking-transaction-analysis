@@ -3,11 +3,14 @@ from contextlib import asynccontextmanager
 import joblib
 import numpy as np
 import pandas as pd
+import os
 from pathlib import Path
 
 from schemas import TransactionInput, PredictionResult, HealthResponse
 
-MODEL_DIR = Path(__file__).parent.parent / "models"
+MODEL_DIR = Path(
+    os.environ.get("MODEL_DIR", str(Path(__file__).parent.parent / "models"))
+)
 
 
 def load_artifacts():
