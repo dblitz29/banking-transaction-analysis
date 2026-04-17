@@ -4,11 +4,11 @@
 
 ## Slide 1: Title
 
-**Bank Transaction Fraud Detection Analysis**
-Take-Home Technical Assessment
+**Bank Transaction Fraud Detection**
+Technical Assessment
 
 Prima Fadhil Sulistyo
-GitHub: github.com/dblitz29/banking-transaction-analysis
+Repo: github.com/dblitz29/banking-transaction-analysis
 
 ---
 
