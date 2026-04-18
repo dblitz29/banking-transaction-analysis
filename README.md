@@ -1,12 +1,12 @@
 # Banking Transaction Fraud Detection Analysis
 
-Analisis data transaksi bank untuk mengidentifikasi pola-pola mencurigakan dan anomali yang berpotensi fraud. Project ini mencakup exploratory data analysis, anomaly detection modeling, dan productionized API inference.
+Analysis of bank transaction data to identify suspicious patterns and potential fraud anomalies. This project includes exploratory data analysis, anomaly detection modeling, and productionized API inference.
 
 ## Dataset
 
-Bank Transaction Dataset for Fraud Detection dari Kaggle.
+Bank Transaction Dataset for Fraud Detection from Kaggle.
 - Source: https://www.kaggle.com/datasets/valakhorasani/bank-transaction-dataset-for-fraud-detection
-- 2,512 transaksi dengan 16 atribut (amount, account info, device, channel, demographics, dll)
+- 2,512 transactions with 16 attributes (amount, account info, device, channel, demographics, etc.)
 
 ## Project Structure
 
@@ -34,13 +34,13 @@ Bank Transaction Dataset for Fraud Detection dari Kaggle.
 pip install -r requirements.txt
 ```
 
-### 2. Jalankan notebooks
+### 2. Run notebooks
 
-Buka dan run notebook secara berurutan:
-1. `notebooks/01_eda.ipynb` - EDA dan analisis data
-2. `notebooks/02_anomaly_detection.ipynb` - training model (output: model artifacts di `models/`)
+Open and run notebooks sequentially:
+1. `notebooks/01_eda.ipynb` - EDA and data analysis
+2. `notebooks/02_anomaly_detection.ipynb` - model training (output: model artifacts in `models/`)
 
-### 3. Jalankan API
+### 3. Run API
 
 ```bash
 cd api
@@ -48,15 +48,15 @@ uv sync
 uv run uvicorn main:app --reload --port 8000
 ```
 
-API docs otomatis tersedia di http://localhost:8000/docs
+API docs automatically available at http://localhost:8000/docs
 
-### 4. Docker (opsional)
+### 4. Docker (optional)
 
 ```bash
 docker compose up --build
 ```
 
-atau manual:
+or manually:
 
 ```bash
 docker build -t fraud-detection-api .
@@ -65,12 +65,12 @@ docker run -p 8000:8000 fraud-detection-api
 
 ## API Endpoints
 
-| Method | Endpoint | Deskripsi |
-|--------|----------|-----------|
-| GET | /health | Health check, cek status model |
-| POST | /predict | Prediksi anomali untuk satu transaksi |
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | /health | Health check, verify model status |
+| POST | /predict | Predict anomaly for a single transaction |
 
-### Contoh request
+### Example request
 
 ```bash
 curl -X POST http://localhost:8000/predict \
@@ -89,7 +89,7 @@ curl -X POST http://localhost:8000/predict \
   }'
 ```
 
-### Contoh response
+### Example response
 
 ```json
 {
@@ -97,11 +97,11 @@ curl -X POST http://localhost:8000/predict \
   "anomaly_score": -0.1303,
   "risk_level": "medium",
   "contributing_factors": [
-    "Login attempts tinggi (7x)",
-    "Rasio amount/balance tinggi (78.19)",
-    "Transaksi di jam tidak wajar (02:00)",
-    "Nominal transaksi besar (9,500.00)",
-    "Durasi transaksi sangat singkat (5s)"
+    "High login attempts (7x)",
+    "High amount/balance ratio (78.19)",
+    "Transaction at unusual hour (02:00)",
+    "Large transaction amount (9,500.00)",
+    "Very short transaction duration (5s)"
   ]
 }
 ```
@@ -109,24 +109,24 @@ curl -X POST http://localhost:8000/predict \
 ## Approach
 
 ### Q1: Exploratory Data Analysis
-- Analisis distribusi variabel numerik dan kategorikal
-- Korelasi antar fitur
-- Identifikasi pola temporal (jam, hari)
-- Deteksi outlier menggunakan IQR method
-- Analisis behavioral per account (multi-device, multi-location)
+- Analysis of numerical and categorical variable distributions
+- Correlation between features
+- Identification of temporal patterns (hour, day)
+- Outlier detection using IQR method
+- Behavioral analysis per account (multi-device, multi-location)
 
 ### Q2: Anomaly Detection Model
-- **Model utama:** Isolation Forest (contamination=5%, n_estimators=200)
-- **Validasi:** Local Outlier Factor sebagai pembanding
-- **Feature engineering:** 13 fitur (raw + temporal + derived + encoded)
-- **Evaluasi:** kualitatif (profil anomali vs normal, consensus analysis, threshold analysis)
+- **Main model:** Isolation Forest (contamination=5%, n_estimators=200)
+- **Validation:** Local Outlier Factor as comparison
+- **Feature engineering:** 13 features (raw + temporal + derived + encoded)
+- **Evaluation:** qualitative (anomaly vs normal profile, consensus analysis, threshold analysis)
 
 ### Q3: Productionized API
-- FastAPI dengan Pydantic data model
-- UV untuk package management
+- FastAPI with Pydantic data model
+- UV for package management
 - Docker support
 - Health check endpoint
-- Contributing factors explanation per prediksi
+- Contributing factors explanation per prediction
 
 ## Tech Stack
 
@@ -136,3 +136,5 @@ curl -X POST http://localhost:8000/predict \
 - FastAPI, Pydantic, uvicorn
 - UV (package manager)
 - Docker
+
+</content>
